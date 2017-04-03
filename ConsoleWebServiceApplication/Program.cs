@@ -11,8 +11,9 @@ namespace ConsoleWebServiceApplication
 {
     class Program
     {
-      
 
+
+        /* Basic Usage */
         public static string CallWebService(string URL)
         {
             HttpWebRequest objRequest = (HttpWebRequest)WebRequest.Create(URL);
@@ -33,9 +34,19 @@ namespace ConsoleWebServiceApplication
 
         static void Main(string[] args)
         {
-            string JSONresponse = CallWebService("http://www.inorthwind.com/Service1.svc/getAllCustomers");
 
+            /* Basic Usage */
+            string JSONresponse = CallWebService("http://www.inorthwind.com/Service1.svc/getAllCustomers");
             List<Customer> customers = JsonConvert.DeserializeObject<List<Customer>>(JSONresponse);
+
+
+
+            // hard way
+            WebService ws = new WebService("service_url", "method_name");
+            ws.Params.Add("param1", "value_1");
+            ws.Params.Add("param2", "value_2");
+            ws.Invoke();
+            // you can get result ws.ResultXML or ws.ResultString
         }
 
 
